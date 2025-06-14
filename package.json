@@ -1,0 +1,95 @@
+{
+    "name": "autoft-bot-wildcard",
+    "version": "1.2.3",
+    "description": "🌐 Advanced Telegram Bot for Cloudflare Wildcard Domain Management with Telegram Notifications",
+    "main": "lib/WildcardBot.js",
+    "bin": {
+        "autoft-bot-wildcard": "./bin/wildcard-bot.js"
+    },
+    "scripts": {
+        "start": "node index.js",
+        "dev": "nodemon index.js",
+        "init": "node scripts/init.js",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
+        "format": "prettier --write .",
+        "check": "npm run lint && npm run format",
+        "publish-npm": "node scripts/publish.js",
+        "version": "npm run check && git add -A",
+        "postversion": "git push && git push --tags",
+        "postinstall": "node -e \"console.log('\\n\\x1b[95m╔═══════════════════════════════════════════════════════════════════╗\\x1b[0m\\n\\x1b[95m║\\x1b[0m  \\x1b[96m🎉\\x1b[93m✨ AutoFT Bot Wildcard Successfully Installed! ✨\\x1b[96m🎉\\x1b[0m      \\x1b[95m║\\x1b[0m\\n\\x1b[95m╠═══════════════════════════════════════════════════════════════════╣\\x1b[0m\\n\\x1b[95m║\\x1b[0m  \\x1b[92m🚀 Quick Start Commands:\\x1b[0m                                        \\x1b[95m║\\x1b[0m\\n\\x1b[95m║\\x1b[0m     \\x1b[97m┌─ Setup Bot: \\x1b[93mautoft-bot-wildcard\\x1b[0m                      \\x1b[95m║\\x1b[0m\\n\\x1b[95m║\\x1b[0m     \\x1b[97m└─ Help: \\x1b[93mautoft-bot-wildcard --help\\x1b[0m                  \\x1b[95m║\\x1b[0m\\n\\x1b[95m║\\x1b[0m                                                                   \\x1b[95m║\\x1b[0m\\n\\x1b[95m║\\x1b[0m  \\x1b[92m📚 Resources:\\x1b[0m                                                 \\x1b[95m║\\x1b[0m\\n\\x1b[95m║\\x1b[0m     \\x1b[97m┌─ Docs: \\x1b[94mhttps://github.com/AutoFTbot/Wildcard-Bot\\x1b[0m   \\x1b[95m║\\x1b[0m\\n\\x1b[95m║\\x1b[0m     \\x1b[97m├─ Support: \\x1b[94mhttps://t.me/AutoFtBot69\\x1b[0m                \\x1b[95m║\\x1b[0m\\n\\x1b[95m║\\x1b[0m     \\x1b[97m└─ Issues: \\x1b[94mgithub.com/AutoFTbot/Wildcard-Bot/issues\\x1b[0m  \\x1b[95m║\\x1b[0m\\n\\x1b[95m║\\x1b[0m                                                                   \\x1b[95m║\\x1b[0m\\n\\x1b[95m║\\x1b[0m  \\x1b[92m🔥 Features:\\x1b[0m \\x1b[91m❤️\\x1b[0m Wildcard DNS \\x1b[91m❤️\\x1b[0m Cloudflare \\x1b[91m❤️\\x1b[0m Auto Setup       \\x1b[95m║\\x1b[0m\\n\\x1b[95m╚═══════════════════════════════════════════════════════════════════╝\\x1b[0m\\n\\x1b[96m💡 Tip: Run \\x1b[93mautoft-bot-wildcard\\x1b[96m to start the interactive setup!\\x1b[0m\\n')\""
+    },
+    "keywords": [
+        "telegram",
+        "telegram-bot",
+        "cloudflare",
+        "wildcard",
+        "domain",
+        "dns",
+        "domain-management",
+        "cloudflare-worker",
+        "notifications",
+        "nodejs",
+        "bot",
+        "automation",
+        "subdomain",
+        "dns-management",
+        "cloudflare-api",
+        "telegraf",
+        "cli",
+        "auto-wildcard"
+    ],
+    "author": {
+        "name": "Wildcard Bot Team",
+        "email": "aginazharmhlutpi14@gmail.com",
+        "url": "https://github.com/AutoFTbot"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "axios": "^1.6.2",
+        "dotenv": "^16.3.1",
+        "form-data": "^4.0.2",
+        "moment-timezone": "^0.6.0",
+        "node-fetch": "^2.7.0",
+        "telegraf": "^4.15.6"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.28.0",
+        "eslint": "^8.57.1",
+        "eslint-plugin-react": "^7.37.5",
+        "globals": "^16.2.0",
+        "nodemon": "^3.0.2",
+        "prettier": "^3.1.1"
+    },
+    "engines": {
+        "node": ">=16.0.0",
+        "npm": ">=8.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/AutoFTbot/Wildcard-Bot.git"
+    },
+    "bugs": {
+        "url": "https://github.com/AutoFTbot/Wildcard-Bot/issues"
+    },
+    "homepage": "https://github.com/AutoFTbot/Wildcard-Bot#readme",
+    "files": [
+        "bin/",
+        "lib/",
+        "config/",
+        "handlers/",
+        "services/",
+        "utils/",
+        "workers/",
+        "docs/",
+        "index.js",
+        ".env.example",
+        "README.md",
+        "LICENSE"
+    ],
+    "preferGlobal": true,
+    "publishConfig": {
+        "access": "public"
+    }
+}

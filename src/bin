@@ -1,0 +1,262 @@
+#!/usr/bin/env node
+
+/*
+ * Auto Wildcard Bot
+ * Created by @AutoFtBot69 (https://t.me/AutoFtBot69)
+ * Copyright (c) 2025 AutoFtBot69
+ * MIT License
+ */
+
+const { execSync } = require('child_process');
+const fs = require('fs');
+const path = require('path');
+const readline = require('readline');
+
+// Colors for better UX
+const colors = {
+    reset: '\x1b[0m',
+    bright: '\x1b[1m',
+    red: '\x1b[31m',
+    green: '\x1b[32m',
+    yellow: '\x1b[33m',
+    blue: '\x1b[34m',
+    magenta: '\x1b[35m',
+    cyan: '\x1b[36m',
+};
+
+const log = {
+    info: (msg) => console.log(`${colors.blue}ℹ${colors.reset} ${msg}`),
+    success: (msg) => console.log(`${colors.green}✅${colors.reset} ${msg}`),
+    error: (msg) => console.log(`${colors.red}❌${colors.reset} ${msg}`),
+    warn: (msg) => console.log(`${colors.yellow}⚠️${colors.reset} ${msg}`),
+    title: (msg) => console.log(`${colors.cyan}${colors.bright}${msg}${colors.reset}`),
+    subtitle: (msg) => console.log(`${colors.magenta}${msg}${colors.reset}`),
+};
+
+// Create readline interface
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+});
+
+// Prompt user for input
+const question = (query) => new Promise((resolve) => rl.question(query, resolve));
+// Main setup function
+async function setupBot() {
+    console.clear();
+    log.title('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    log.title(' A U T O F T   B O T   W I L D C A R D ');
+    log.title('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    log.subtitle('      https://t.me/AutoFtBot69');
+    log.title('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log();
+    log.info("Welcome! Let's set up your AutoFT Bot Wildcard in 3 easy steps:");
+    console.log('  1️⃣  Bot Token Configuration');
+    console.log('  2️⃣  Admin Setup');
+    console.log('  3️⃣  Launch Bot');
+    console.log();
+    // Create working directory
+    const workDir = process.cwd();
+    const botDir = path.join(workDir, 'autoft-bot-wildcard');
+    // Check if directory exists
+    if (fs.existsSync(botDir)) {
+        log.warn(`Directory ${botDir} already exists!`);
+        const overwrite = await question('Do you want to overwrite it? (y/N): ');
+        if (overwrite.toLowerCase() !== 'y') {
+            log.info('Setup cancelled.');
+            rl.close();
+            return;
+        }
+        // Remove existing directory
+        fs.rmSync(botDir, { recursive: true, force: true });
+    }
+    // Create bot directory
+    fs.mkdirSync(botDir, { recursive: true });
+    process.chdir(botDir);
+    log.success(`Created bot directory: ${botDir}`);
+    console.log();
+    // Step 1: Bot Token
+    log.subtitle('1️⃣  BOT TOKEN CONFIGURATION');
+    log.info('Get your bot token from @BotFather on Telegram');
+    log.info('Link: https://t.me/BotFather');
+    console.log();
+    let botToken = '';
+    while (!botToken) {
+        botToken = await question('Enter your bot token: ');
+        if (!botToken) {
+            log.error('Bot token is required!');
+        } else if (!botToken.includes(':')) {
+            log.error('Invalid bot token format!');
+            botToken = '';
+        }
+    }
+    // Step 2: Admin Setup
+    console.log();
+    log.subtitle('2️⃣  ADMIN CONFIGURATION');
+    log.info('Get your Telegram ID from @userinfobot');
+    log.info('Link: https://t.me/userinfobot');
+    console.log();
+    let adminId = '';
+    while (!adminId) {
+        adminId = await question('Enter your Telegram ID: ');
+        if (!adminId || isNaN(adminId)) {
+            log.error('Please enter a valid numeric Telegram ID!');
+            adminId = '';
+        }
+    }
+    // Optional: Telegram Group ID
+    console.log();
+    log.subtitle('📱 NOTIFICATIONS (Optional)');
+    const groupId = await question(
+        'Telegram Group ID for notifications (optional, press Enter to skip): '
+    );
+    // Step 3: Create config files
+    console.log();
+    log.subtitle('3️⃣  GENERATING CONFIGURATION FILES');
+    // Create .env file
+    const envContent = `# AutoFT Bot Wildcard Configuration
+# Required: Telegram Bot Token from @BotFather
+BOT_TOKEN=${botToken}
+# Optional: Telegram Group ID for notifications
+${groupId ? `TELEGRAM_GROUP_ID=${groupId}` : '# TELEGRAM_GROUP_ID=your_group_id_here'}
+
+# === ADMIN CONFIGURATION ===
+ADMIN_IDS=${adminId}
+# === DOMAIN CONFIGURATION ===
+MAX_CUSTOM_DOMAINS=5
+# === TELEGRAM NOTIFICATIONS ===
+TELEGRAM_GROUP_ID=${groupId || ''}
+# === OPTIONAL CONFIGURATION ===
+NODE_ENV=production
+LOG_LEVEL=info
+`;
+    fs.writeFileSync('.env', envContent);
+    log.success('Created .env file');
+    // Create config file
+    const configContent = `module.exports = {
+    // Admin Configuration - Add your Telegram ID here
+    ADMIN_IDS: [${adminId}],
+    // Bot Limits
+    MAX_CUSTOM_DOMAINS: 5,
+    MAX_DOMAINS_PER_USER: 10,
+    // Notification Settings
+    NOTIFICATIONS: {
+        TELEGRAM: {
+            enabled: true,
+            groupId: process.env.TELEGRAM_GROUP_ID || '',
+        },
+    },
+    // Default Domains (you can customize these)
+    DEFAULT_DOMAINS: [
+        'example.com',
+        'test.com',
+        'demo.com'
+    ]
+};`;
+    fs.mkdirSync('config', { recursive: true });
+    fs.writeFileSync('config/default.js', configContent);
+    log.success('Created config/default.js');
+    // Create package.json for user project
+    const userPackageJson = {
+        name: 'my-autoft-bot-wildcard',
+        version: '1.0.0',
+        description: 'My AutoFT Bot Wildcard instance',
+        main: 'index.js',
+        scripts: {
+            start: 'node index.js',
+            dev: 'nodemon index.js',
+            stop: "pkill -f 'node index.js'",
+            restart: 'npm run stop && npm start',
+            logs: 'tail -f bot.log',
+        },
+        dependencies: {
+            'autoft-bot-wildcard': '^1.2.3',
+            dotenv: '^16.3.1',
+        },
+        keywords: ['telegram', 'bot', 'wildcard', 'cloudflare', 'autoft'],
+        author: 'AutoFtBot69',
+        license: 'MIT',
+    };
+    fs.writeFileSync('package.json', JSON.stringify(userPackageJson, null, 2));
+    log.success('Created package.json');
+    // Create main index.js file
+    const indexContent = `// AutoFT Bot Wildcard
+// Auto-generated by CLI setup
+require('dotenv').config();
+const WildcardBot = require('autoft-bot-wildcard');
+// Start the bot with your configuration
+const bot = new WildcardBot({
+    configPath: './config/default.js'
+});
+bot.start().then(() => {
+    console.log('🎉 AutoFT Bot Wildcard is running!');
+    console.log('📱 Send /start to your bot to begin');
+}).catch(error => {
+    console.error('❌ Failed to start bot:', error.message);
+    process.exit(1);
+});
+
+process.on('SIGINT', () => {
+    console.log('\\n👋 Shutting down bot...');
+    bot.stop();
+    process.exit(0);
+});`;
+    fs.writeFileSync('index.js', indexContent);
+    log.success('Created index.js');
+    // Create data directory
+    fs.mkdirSync('data', { recursive: true });
+    log.success('Created data directory');
+    // Install dependencies
+    console.log();
+    log.subtitle('📦 INSTALLING DEPENDENCIES');
+    log.info('Installing autoft-bot-wildcard package...');
+    try {
+        execSync('npm install', { stdio: 'pipe' });
+        log.success('Dependencies installed successfully!');
+    } catch (error) {
+        log.error('Failed to install dependencies');
+        log.info('You can manually run: npm install');
+    }
+    // Final success message
+    console.log();
+    log.title('🎉 SETUP COMPLETED SUCCESSFULLY!');
+    log.subtitle('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log();
+    log.success('Your AutoFT Bot Wildcard is ready to use!');
+    console.log();
+    log.info('📂 Bot files created in:');
+    console.log(`   ${botDir}`);
+    console.log();
+    log.info('🚀 To start your bot:');
+    console.log(`   cd ${path.relative(workDir, botDir)}`);
+    console.log('   npm start');
+    console.log();
+    log.info('📱 Next steps:');
+    console.log('   1. Send /start to your bot on Telegram');
+    console.log('   2. Use /addcf to configure Cloudflare');
+    console.log('   3. Start setting up wildcard domains!');
+    console.log();
+    log.info('📖 Need help? Check the documentation:');
+    console.log('   https://github.com/AutoFTbot/Wildcard-Bot');
+    rl.close();
+}
+// CLI argument handling
+const args = process.argv.slice(2);
+if (args.includes('--help') || args.includes('-h')) {
+    console.log(`
+🌐 AutoFT Bot Wildcard CLI
+Usage:
+  autoft-bot-wildcard          Start interactive setup
+  autoft-bot-wildcard --help   Show this help message
+  autoft-bot-wildcard --setup  Start interactive setup (same as no args)
+Examples:
+  autoft-bot-wildcard          # Interactive setup
+  autoft-bot-wildcard --setup  # Interactive setup
+    `);
+    process.exit(0);
+}
+// Start setup
+setupBot().catch((error) => {
+    log.error('Setup failed:', error.message);
+    process.exit(1);
+});
