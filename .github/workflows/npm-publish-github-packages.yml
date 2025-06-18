@@ -41,13 +41,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          registry-url: https://npm.pkg.github.com/
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@autoftbot69'
           
       - name: Install dependencies
         run: npm ci
         
       - name: Publish to GitHub Packages
-        run: npm publish
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+          npm publish
         env:
-          # Use the built-in GITHUB_TOKEN for authentication
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
