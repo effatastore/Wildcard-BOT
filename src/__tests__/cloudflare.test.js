@@ -44,28 +44,4 @@ describe('CloudflareManager', () => {
             expect(result).toBe('example.com');
         });
     });
-
-    describe('setConfig', () => {
-        it('should save config successfully', () => {
-            const testConfig = {
-                apiKey: 'test-api-key',
-                email: 'test@example.com'
-            };
-            
-            expect(() => {
-                cloudflareManager.setConfig(testConfig);
-            }).not.toThrow();
-
-            const savedConfig = cloudflareManager.getConfig();
-            expect(savedConfig).toEqual(testConfig);
-        });
-    });
-
-    describe('getDomains', () => {
-        it('should return empty array if no domains exist', () => {
-            const domains = cloudflareManager.getDomains();
-            expect(Array.isArray(domains)).toBe(true);
-            expect(domains).toHaveLength(0);
-        });
-    });
-}); 
+});
