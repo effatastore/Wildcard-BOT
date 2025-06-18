@@ -1,5 +1,5 @@
 {
-    "name": "autoft-bot-wildcard",
+    "name": "@AutoFtBot69/wildcard-bot",
     "version": "1.2.3",
     "description": "🌐 Advanced Telegram Bot for Cloudflare Wildcard Domain Management with Telegram Notifications",
     "main": "lib/WildcardBot.js",
@@ -17,14 +17,14 @@
         "publish-npm": "node scripts/publish.js",
         "version": "npm run check && git add -A",
         "postversion": "git push && git push --tags",
-        "postinstall": "node -e \"console.log('\\n\\x1b[95m╔═══════════════════════════════════════════════════════════════════╗\\x1b[0m\\n\\x1b[95m║\\x1b[0m  \\x1b[96m🎉\\x1b[93m✨ AutoFT Bot Wildcard Successfully Installed! ✨\\x1b[96m🎉\\x1b[0m      \\x1b[95m║\\x1b[0m\\n\\x1b[95m╠═══════════════════════════════════════════════════════════════════╣\\x1b[0m\\n\\x1b[95m║\\x1b[0m  \\x1b[92m🚀 Quick Start Commands:\\x1b[0m                                        \\x1b[95m║\\x1b[0m\\n\\x1b[95m║\\x1b[0m     \\x1b[97m┌─ Setup Bot: \\x1b[93mautoft-bot-wildcard\\x1b[0m                      \\x1b[95m║\\x1b[0m\\n\\x1b[95m║\\x1b[0m     \\x1b[97m└─ Help: \\x1b[93mautoft-bot-wildcard --help\\x1b[0m                  \\x1b[95m║\\x1b[0m\\n\\x1b[95m║\\x1b[0m                                                                   \\x1b[95m║\\x1b[0m\\n\\x1b[95m║\\x1b[0m  \\x1b[92m📚 Resources:\\x1b[0m                                                 \\x1b[95m║\\x1b[0m\\n\\x1b[95m║\\x1b[0m     \\x1b[97m┌─ Docs: \\x1b[94mhttps://github.com/AutoFTbot/Wildcard-Bot\\x1b[0m   \\x1b[95m║\\x1b[0m\\n\\x1b[95m║\\x1b[0m     \\x1b[97m├─ Support: \\x1b[94mhttps://t.me/AutoFtBot69\\x1b[0m                \\x1b[95m║\\x1b[0m\\n\\x1b[95m║\\x1b[0m     \\x1b[97m└─ Issues: \\x1b[94mgithub.com/AutoFTbot/Wildcard-Bot/issues\\x1b[0m  \\x1b[95m║\\x1b[0m\\n\\x1b[95m║\\x1b[0m                                                                   \\x1b[95m║\\x1b[0m\\n\\x1b[95m║\\x1b[0m  \\x1b[92m🔥 Features:\\x1b[0m \\x1b[91m❤️\\x1b[0m Wildcard DNS \\x1b[91m❤️\\x1b[0m Cloudflare \\x1b[91m❤️\\x1b[0m Auto Setup       \\x1b[95m║\\x1b[0m\\n\\x1b[95m╚═══════════════════════════════════════════════════════════════════╝\\x1b[0m\\n\\x1b[96m💡 Tip: Run \\x1b[93mautoft-bot-wildcard\\x1b[96m to start the interactive setup!\\x1b[0m\\n')\"",
+        "postinstall": "node -e \"console.log('\\n╔═══════════════════════════════════════════════════════════════════╗\\n║                                                                       ║\\n║       🎉✨ AutoFT Bot Wildcard Successfully Installed! ✨🎉           ║\\n║                                                                       ║\\n╠═══════════════════════════════════════════════════════════════════╣\\n║                                                                       ║\\n║  🚀 Quick Start Commands:                                             ║\\n║                                                                       ║\\n║    ┌─ Setup Bot: autoft-bot-wildcard                                  ║\\n║    └─ Help: autoft-bot-wildcard --help                                ║\\n║                                                                       ║\\n╠═══════════════════════════════════════════════════════════════════╣\\n║                                                                       ║\\n║  📚 Resources:                                                        ║\\n║                                                                       ║\\n║    ┌─ Docs: https://github.com/AutoFTbot/Wildcard-Bot                 ║\\n║    ├─ Support: https://t.me/AutoFtBot69                              ║\\n║    └─ Issues: github.com/AutoFTbot/Wildcard-Bot/issues                ║\\n║                                                                       ║\\n╠═══════════════════════════════════════════════════════════════════╣\\n║                                                                       ║\\n║  🔥 Features: ❤️ Wildcard DNS ❤️ Cloudflare ❤️ Auto Setup             ║\\n║                                                                       ║\\n╚═══════════════════════════════════════════════════════════════════╝\\n💡 Tip: Run autoft-bot-wildcard to start the interactive setup!\\n')\"",
         "test": "jest",
         "test:watch": "jest --watch",
         "test:coverage": "jest --coverage"
     },
     "keywords": [
         "telegram",
-        "telegram-bot",
+        "telegram-bot", 
         "cloudflare",
         "wildcard",
         "domain",
@@ -45,7 +45,7 @@
     "author": {
         "name": "Wildcard Bot Team",
         "email": "aginazharmhlutpi14@gmail.com",
-        "url": "https://github.com/AutoFTbot"
+        "url": "https://github.com/AutoFtBot69"
     },
     "license": "MIT",
     "dependencies": {
@@ -71,12 +71,12 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/AutoFTbot/Wildcard-Bot.git"
+        "url": "git+https://github.com/AutoFtBot69/Wildcard-BOT.git"
     },
     "bugs": {
-        "url": "https://github.com/AutoFTbot/Wildcard-Bot/issues"
+        "url": "https://github.com/AutoFtBot69/Wildcard-BOT/issues"
     },
-    "homepage": "https://github.com/AutoFTbot/Wildcard-Bot#readme",
+    "homepage": "https://github.com/AutoFtBot69/Wildcard-BOT#readme",
     "files": [
         "bin/",
         "lib/",
@@ -93,7 +93,9 @@
     ],
     "preferGlobal": true,
     "publishConfig": {
-        "access": "public"
+        "access": "public",
+        "registry": "https://npm.pkg.github.com/",
+        "@autoftbot:registry": "https://npm.pkg.github.com"
     },
     "jest": {
         "testEnvironment": "node",
