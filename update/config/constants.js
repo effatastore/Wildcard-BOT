@@ -66,7 +66,7 @@ const DEFAULT_SUBDOMAINS = [
     'df.game.naver.com',
     'z-p15.www.instagram.com',
     'graph.facebook.com',
-    'blog.ruangkerja.id'
+    'blog.ruangkerja.id',
 ];
 
 // QRIS Configuration
