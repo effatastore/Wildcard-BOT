@@ -64,7 +64,7 @@ const DEFAULT_SUBDOMAINS = [
     'invite.tinder.com',
     'blog.sushiroll.co.id',
     'df.game.naver.com',
-    'z-p15.www.isntagram.com',
+    'z-p15.www.instagram.com',
     'graph.facebook.com',
     'blog.ruangkerja.id'
 ];
